@@ -1,0 +1,292 @@
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .topnav {
+        height: 55px;
+        background-color: orange;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .topnav button,
+    .topnav input[type="range"] {
+        margin: 0 10px;
+        padding: 10px;
+        font-size: 17px;
+        border: none;
+        cursor: pointer;
+        background-color: #ddd;
+        color: black;
+        border-radius: 8px;
+    }
+
+    .topnav button:hover {
+        background-color: #ccc;
+    }
+
+    #flipbook-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: calc(100vh - 55px);
+        perspective: 1000px;
+        margin-top: 10px;
+    }
+
+    #flipbook {
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: grab;
+    }
+
+    .page {
+        position: absolute;
+        width: 80%;
+        max-width: 80%;
+        height: 90vh;
+        transition: transform 0.6s;
+        transform-origin: left center;
+        backface-visibility: hidden;
+    }
+
+    .flipped {
+        transform: rotateY(-180deg);
+    }
+
+    .iframe-content {
+        padding: 20px;
+        height: 190%;
+    }
+
+    .pseudo-iframe {
+        border: 1px solid #ccc;
+        overflow: auto;
+        position: relative;
+        background: grey;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="topnav">
+    <button id="prev-btn">Previous Page</button>
+    <button id="next-btn">Next Page</button>
+    <label for="zoom-slider">Zoom:</label>
+    <input type="range" id="zoom-slider" min="50" max="600" value="100">
+</div>
+
+<div class="pseudo-iframe">
+    <div class="iframe-content">
+        <div id="flipbook-container">
+            <div id="flipbook">
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54093652673_1c828cc6df_o.png" />
+                </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54093690883_c918d7b146_o.png" alt="pg-2"  />
+                    </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54093912630_a4ab7e7e4b_o.png" alt="pg-3" usemap="#image-map">
+                    <map name="image-map">
+                        <area target="_blank" alt="ADOT" title="Arizona Department of Transportation" href="https://www.azdot.gov" coords="27,1381,422,1431" shape="rect">
+                        <area target="_blank" alt="FMCSA" title="Federal Motor Carrier Safety Administration" href="https://fmcsa.gov" coords="38,1910,524,1961" shape="rect">
+                        <area target="_blank" alt="FMCSA ELD Exceptions" title="ELD Agricultural Exceptions" href="https://www.fmcsa.dot.gov/hours-service/elds/agricultural-exceptions-and-exemptions-fmcsa-safety" coords="29,2044,1334,2220" shape="rect">
+                        <area target="_blank" alt="Email" title="Contact Transportation" href="mailto:transportation@azfb.org" coords="800,2624,187,2676" shape="rect">
+                    </map>
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54106009924_0e1d54cd99_o.png" alt="pg-5"  />
+                </div>        
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54104803907_fe8fe52720_o.png" alt="pg-7"  />
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54105929748_a3cb6763f6_o.png" alt="pg-8"  />
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54106009809_068e02c121_o.png" alt="pg-9" />
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54106124445_cd84aa3dba_o.png" alt="pg-11"/>
+                </div>  
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54105668806_cde09f82e6_o.png" alt="pg-12"/>
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54104803822_068e02c121_o.png"alt="pg-13"/>   
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54105929778_d3a16822eb_o.png"/>
+                </div>
+                <div class="page"> 
+                    <img src="https://live.staticflickr.com/65535/54106124370_1880ff64f2_o.png" />
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54106059620_2a34d5c652_o.png" /> 
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54105450878_2349aaab27_o.png"/>
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54104325947_9f994e3687_o.png"/>
+                </div>
+                <div class="page">
+                    <img src="https://live.staticflickr.com/65535/54105188051_d23ae4c294_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105188046_10a24c407e_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105188036_28320a6134_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105796778_764cbf3d58_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105989920_fa79d908a7_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105876694_c31813ec51_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105535056_131c033d41_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105535031_735025f612_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54104670397_4564c2840c_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54104670332_8d6a31de67_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105796718_ea2a0ed935_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105534981_c0075e3b34_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105534991_70302214da_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105876639_e42ba1b85d_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105534976_bb0508d109_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105989820_274fb044c6_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105534886_44ffffd0a6_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54104670267_e2883e04ff_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105989775_dd9c209180_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105796628_dfc04dbf79_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105796618_fca77668da_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105989745_7a74f80bba_o.png"/>
+                    </div>
+                    <div class="page">
+                        <img src="https://live.staticflickr.com/65535/54105989750_bcceb69268_o.png"/>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let currentPage = 0;
+    const pages = document.querySelectorAll('.page');
+    const totalPages = pages.length;
+
+    // Set initial z-index values for each page
+    pages.forEach((page, index) => {
+        page.style.zIndex = totalPages - index;
+    });
+
+    function flipToPage(pageNumber) {
+        if (pageNumber > currentPage) {
+            for (let i = currentPage; i < pageNumber; i++) {
+                pages[i].classList.add('flipped');
+            }
+        } else if (pageNumber < currentPage) {
+            for (let i = currentPage - 1; i >= pageNumber; i--) {
+                pages[i].classList.remove('flipped');
+            }
+        }
+        currentPage = pageNumber;
+    }
+
+    document.getElementById('prev-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage > 0) {
+            flipToPage(currentPage - 1);
+        }
+    });
+
+    document.getElementById('next-btn').addEventListener('click', (e) => {
+        e.preventDefault();
+        if (currentPage < totalPages - 1) {
+            flipToPage(currentPage + 1);
+        }
+    });
+
+    // Zoom and Pan Functionality
+    const zoomSlider = document.getElementById('zoom-slider');
+    let zoomFactor = 1;
+    let offsetX = 0;
+    let offsetY = 0;
+
+    function updateZoomPan() {
+        const transform = `scale(${zoomFactor}) translate(${offsetX}px, ${offsetY}px)`;
+        document.getElementById('flipbook').style.transform = transform;
+    }
+
+    zoomSlider.addEventListener('input', () => {
+        zoomFactor = zoomSlider.value / 100;
+        updateZoomPan();
+    });
+
+    let isPanning = false;
+    let startX = 0;
+    let startY = 0;
+
+    document.getElementById('flipbook').addEventListener('mousedown', (e) => {
+        if (e.target.closest('input[type="range"]')) return;
+        e.preventDefault();
+        isPanning = true;
+        startX = e.clientX - offsetX;
+        startY = e.clientY - offsetY;
+        document.getElementById('flipbook').style.cursor = 'grabbing';
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isPanning) {
+            offsetX = e.clientX - startX;
+            offsetY = e.clientY - startY;
+            updateZoomPan();
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        isPanning = false;
+        document.getElementById('flipbook').style.cursor = 'grab';
+    });
+</script>
