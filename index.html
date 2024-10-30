@@ -212,81 +212,92 @@
 </div>
 
 <script>
-    let currentPage = 0;
-    const pages = document.querySelectorAll('.page');
-    const totalPages = pages.length;
+let currentPage = 0;
+const pages = document.querySelectorAll('.page');
+const totalPages = pages.length;
 
-    // Set initial z-index values for each page
-    pages.forEach((page, index) => {
-        page.style.zIndex = totalPages - index;
-    });
+// Set initial z-index values for each page
+pages.forEach((page, index) => {
+    page.style.zIndex = totalPages - index;
+});
 
-    function flipToPage(pageNumber) {
-        if (pageNumber > currentPage) {
-            for (let i = currentPage; i < pageNumber; i++) {
-                pages[i].classList.add('flipped');
-            }
-        } else if (pageNumber < currentPage) {
-            for (let i = currentPage - 1; i >= pageNumber; i--) {
-                pages[i].classList.remove('flipped');
-            }
+function flipToPage(pageNumber) {
+    if (pageNumber > currentPage) {
+        for (let i = currentPage; i < pageNumber; i++) {
+            pages[i].classList.add('flipped');
         }
-        currentPage = pageNumber;
+    } else if (pageNumber < currentPage) {
+        for (let i = currentPage - 1; i >= pageNumber; i--) {
+            pages[i].classList.remove('flipped');
+        }
     }
+    currentPage = pageNumber;
+}
 
-    document.getElementById('prev-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (currentPage > 0) {
-            flipToPage(currentPage - 1);
-        }
-    });
-
-    document.getElementById('next-btn').addEventListener('click', (e) => {
-        e.preventDefault();
-        if (currentPage < totalPages - 1) {
-            flipToPage(currentPage + 1);
-        }
-    });
-
-    // Zoom and Pan Functionality
-    const zoomSlider = document.getElementById('zoom-slider');
-    let zoomFactor = 1;
-    let offsetX = 0;
-    let offsetY = 0;
-
-    function updateZoomPan() {
-        const transform = `scale(${zoomFactor}) translate(${offsetX}px, ${offsetY}px)`;
-        document.getElementById('flipbook').style.transform = transform;
+document.getElementById('prev-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentPage > 0) {
+        flipToPage(currentPage - 1);
     }
+});
 
-    zoomSlider.addEventListener('input', () => {
-        zoomFactor = zoomSlider.value / 100;
+document.getElementById('next-btn').addEventListener('click', (e) => {
+    e.preventDefault();
+    if (currentPage < totalPages - 1) {
+        flipToPage(currentPage + 1);
+    }
+});
+
+// Zoom and Pan Functionality
+const zoomSlider = document.getElementById('zoom-slider');
+zoomSlider.min = 20;   // Minimum zoom scale, 0.2x
+zoomSlider.max = 200;  // Maximum zoom scale, 2x
+zoomSlider.value = 50; // Start zoomed-out at 0.5x
+let zoomFactor = zoomSlider.value / 100; // Initial zoom factor at 0.5
+let offsetX = 0;
+let offsetY = 0;
+
+function updateZoomPan() {
+    const transform = `scale(${zoomFactor}) translate(${offsetX}px, ${offsetY}px)`;
+    document.getElementById('flipbook').style.transform = transform;
+}
+
+// Update zoom level on slider input
+zoomSlider.addEventListener('input', () => {
+    zoomFactor = zoomSlider.value / 100;
+    updateZoomPan();
+});
+
+let isPanning = false;
+let startX = 0;
+let startY = 0;
+
+// Start panning on mousedown
+document.getElementById('flipbook').addEventListener('mousedown', (e) => {
+    if (e.target.closest('input[type="range"]')) return;
+    e.preventDefault();
+    isPanning = true;
+    startX = e.clientX - offsetX;
+    startY = e.clientY - offsetY;
+    document.getElementById('flipbook').style.cursor = 'grabbing';
+});
+
+// Update position while panning
+document.addEventListener('mousemove', (e) => {
+    if (isPanning) {
+        offsetX = e.clientX - startX;
+        offsetY = e.clientY - startY;
         updateZoomPan();
-    });
+    }
+});
 
-    let isPanning = false;
-    let startX = 0;
-    let startY = 0;
+// Stop panning on mouseup
+document.addEventListener('mouseup', () => {
+    isPanning = false;
+    document.getElementById('flipbook').style.cursor = 'grab';
+});
 
-    document.getElementById('flipbook').addEventListener('mousedown', (e) => {
-        if (e.target.closest('input[type="range"]')) return;
-        e.preventDefault();
-        isPanning = true;
-        startX = e.clientX - offsetX;
-        startY = e.clientY - offsetY;
-        document.getElementById('flipbook').style.cursor = 'grabbing';
-    });
+// Apply initial zoom and pan settings
+updateZoomPan();
 
-    document.addEventListener('mousemove', (e) => {
-        if (isPanning) {
-            offsetX = e.clientX - startX;
-            offsetY = e.clientY - startY;
-            updateZoomPan();
-        }
-    });
-
-    document.addEventListener('mouseup', () => {
-        isPanning = false;
-        document.getElementById('flipbook').style.cursor = 'grab';
-    });
 </script>
